@@ -26,6 +26,7 @@ public class ProductRepository {
     }
 
     public List<Product> searchByCriteria(ProductSearchCriteria productSearchCriteria) {
+        log.info("search by criteria: {}", productSearchCriteria);
         try(Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
 
