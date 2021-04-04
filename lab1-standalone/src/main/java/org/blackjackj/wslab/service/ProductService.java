@@ -11,7 +11,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-@WebService(serviceName = "ProductService")
+@WebService(serviceName = "ProductWebService")
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductService {
