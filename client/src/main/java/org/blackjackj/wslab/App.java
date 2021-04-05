@@ -59,7 +59,7 @@ public class App {
     }
 
     private static ProductService getProductService() throws MalformedURLException {
-        URL serviceUrl = new URL("http://localhost:8080/ProductService?wsdl");
+        URL serviceUrl = new URL("http://localhost:8080/wslab-server/ProductWebService?wsdl");
         return new ProductWebService(serviceUrl).getProductServicePort();
     }
 

@@ -17,6 +17,6 @@ public class App
         ds.setServerName("localhost");
         ProductRepository repository = new ProductRepository(ds);
         ProductService service = new ProductService(repository);
-        Endpoint.publish("http://0.0.0.0:8080/ProductService", service);
+        Endpoint.publish("http://0.0.0.0:8080/wslab-server/ProductWebService", service);
     }
 }
