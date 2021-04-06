@@ -1,0 +1,17 @@
+services:
+  webserver:
+    image: blackjackj/wslab-server:latest
+    links:
+      - wslab-database
+    depends_on:
+      - wslab-database
+    ports:
+      - 8080:8080
+  wslab-database:
+    build:
+      context: postgre
+      dockerfile: Dockerfile
+    ports:
+    - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=wsadminpass

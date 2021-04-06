@@ -11,10 +11,10 @@
         <relativePath></relativePath>
     </parent>
 
-    <artifactId>client</artifactId>
+    <artifactId>server</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>client</name>
+    <name>server</name>
 
     <packaging>pom</packaging>
 
@@ -25,25 +25,25 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>client-1</module>
+                <module>lab1-standalone</module>
             </modules>
         </profile>
         <profile>
             <id>lab-1-j2ee</id>
             <modules>
-                <module>client-1</module>
+                <module>lab1-j2ee</module>
             </modules>
         </profile>
         <profile>
             <id>lab-2</id>
             <modules>
-                <module>client-2</module>
+                <module>lab2-standalone</module>
             </modules>
         </profile>
     </profiles>
 
     <build>
-        <finalName>${wslab.client.name}</finalName>
+        <finalName>${wslab.server.name}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -62,7 +62,6 @@
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
-                        <outputDirectory>${basedir}\..\..</outputDirectory>
                         <appendAssemblyId>false</appendAssemblyId>
                         <archive>
                             <manifest>
@@ -70,6 +69,30 @@
                                 <addClasspath>true</addClasspath>
                             </manifest>
                         </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.35.0</version>
+                    <executions>
+                        <execution>
+                            <id>default</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <images>
+                            <image>
+                                <name>blackjackj/wslab-server</name>
+                                <build>
+                                    <contextDir>${basedir}</contextDir>
+                                </build>
+                            </image>
+                        </images>
                     </configuration>
                 </plugin>
             </plugins>
