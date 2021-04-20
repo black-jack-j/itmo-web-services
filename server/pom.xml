@@ -40,6 +40,12 @@
                 <module>lab2-standalone</module>
             </modules>
         </profile>
+        <profile>
+            <id>lab-3</id>
+            <modules>
+                <module>lab3-standalone</module>
+            </modules>
+        </profile>
     </profiles>
 
     <build>
@@ -87,7 +93,7 @@
                     <configuration>
                         <images>
                             <image>
-                                <name>blackjackj/wslab-server</name>
+                                <name>blackjackj/wslab-server:latest</name>
                                 <build>
                                     <contextDir>${basedir}</contextDir>
                                 </build>
