@@ -11,6 +11,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ProductRepositoryTest {
 
@@ -86,5 +90,18 @@ public class ProductRepositoryTest {
 
         return mockedResultSet;
     }
+
+    @Test
+    public void testPlain() {
+        String test = "hello";
+
+        List<String> container = Collections.singletonList(test);
+
+        test = "hello2";
+
+        container.forEach(System.out::println);
+    }
+
+    
 
 }

@@ -25,16 +25,18 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _ProductCreateException_QNAME = new QName("http://service.wslab.blackjackj.org/", "ProductCreateException");
-    private final static QName _DeleteProductById_QNAME = new QName("http://service.wslab.blackjackj.org/", "deleteProductById");
+    private final static QName _GetImageResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "getImageResponse");
     private final static QName _ProductUpdateException_QNAME = new QName("http://service.wslab.blackjackj.org/", "ProductUpdateException");
-    private final static QName _CreateProductResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "createProductResponse");
     private final static QName _UpdateProduct_QNAME = new QName("http://service.wslab.blackjackj.org/", "updateProduct");
     private final static QName _CreateProduct_QNAME = new QName("http://service.wslab.blackjackj.org/", "createProduct");
     private final static QName _GetProductsResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "getProductsResponse");
+    private final static QName _DeleteProductByIdResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "deleteProductByIdResponse");
+    private final static QName _DeleteProductById_QNAME = new QName("http://service.wslab.blackjackj.org/", "deleteProductById");
+    private final static QName _CreateProductResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "createProductResponse");
     private final static QName _ProductSearchException_QNAME = new QName("http://service.wslab.blackjackj.org/", "ProductSearchException");
+    private final static QName _GetImage_QNAME = new QName("http://service.wslab.blackjackj.org/", "getImage");
     private final static QName _ProductNotFoundException_QNAME = new QName("http://service.wslab.blackjackj.org/", "ProductNotFoundException");
     private final static QName _GetProducts_QNAME = new QName("http://service.wslab.blackjackj.org/", "getProducts");
-    private final static QName _DeleteProductByIdResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "deleteProductByIdResponse");
     private final static QName _UpdateProductResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "updateProductResponse");
 
     /**
@@ -45,27 +47,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetImageResponse }
+     * 
+     */
+    public GetImageResponse createGetImageResponse() {
+        return new GetImageResponse();
+    }
+
+    /**
      * Create an instance of {@link ProductCreateFault }
      * 
      */
     public ProductCreateFault createProductCreateFault() {
         return new ProductCreateFault();
-    }
-
-    /**
-     * Create an instance of {@link DeleteProductById }
-     * 
-     */
-    public DeleteProductById createDeleteProductById() {
-        return new DeleteProductById();
-    }
-
-    /**
-     * Create an instance of {@link CreateProductResponse }
-     * 
-     */
-    public CreateProductResponse createCreateProductResponse() {
-        return new CreateProductResponse();
     }
 
     /**
@@ -101,6 +95,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DeleteProductByIdResponse }
+     * 
+     */
+    public DeleteProductByIdResponse createDeleteProductByIdResponse() {
+        return new DeleteProductByIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeleteProductById }
+     * 
+     */
+    public DeleteProductById createDeleteProductById() {
+        return new DeleteProductById();
+    }
+
+    /**
+     * Create an instance of {@link CreateProductResponse }
+     * 
+     */
+    public CreateProductResponse createCreateProductResponse() {
+        return new CreateProductResponse();
+    }
+
+    /**
      * Create an instance of {@link ProductNotFoundFault }
      * 
      */
@@ -125,11 +143,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DeleteProductByIdResponse }
+     * Create an instance of {@link GetImage }
      * 
      */
-    public DeleteProductByIdResponse createDeleteProductByIdResponse() {
-        return new DeleteProductByIdResponse();
+    public GetImage createGetImage() {
+        return new GetImage();
     }
 
     /**
@@ -182,12 +200,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteProductById }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetImageResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "deleteProductById")
-    public JAXBElement<DeleteProductById> createDeleteProductById(DeleteProductById value) {
-        return new JAXBElement<DeleteProductById>(_DeleteProductById_QNAME, DeleteProductById.class, null, value);
+    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "getImageResponse")
+    public JAXBElement<GetImageResponse> createGetImageResponse(GetImageResponse value) {
+        return new JAXBElement<GetImageResponse>(_GetImageResponse_QNAME, GetImageResponse.class, null, value);
     }
 
     /**
@@ -197,15 +215,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "ProductUpdateException")
     public JAXBElement<ProductUpdateFault> createProductUpdateException(ProductUpdateFault value) {
         return new JAXBElement<ProductUpdateFault>(_ProductUpdateException_QNAME, ProductUpdateFault.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CreateProductResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "createProductResponse")
-    public JAXBElement<CreateProductResponse> createCreateProductResponse(CreateProductResponse value) {
-        return new JAXBElement<CreateProductResponse>(_CreateProductResponse_QNAME, CreateProductResponse.class, null, value);
     }
 
     /**
@@ -236,12 +245,48 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteProductByIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "deleteProductByIdResponse")
+    public JAXBElement<DeleteProductByIdResponse> createDeleteProductByIdResponse(DeleteProductByIdResponse value) {
+        return new JAXBElement<DeleteProductByIdResponse>(_DeleteProductByIdResponse_QNAME, DeleteProductByIdResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteProductById }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "deleteProductById")
+    public JAXBElement<DeleteProductById> createDeleteProductById(DeleteProductById value) {
+        return new JAXBElement<DeleteProductById>(_DeleteProductById_QNAME, DeleteProductById.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateProductResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "createProductResponse")
+    public JAXBElement<CreateProductResponse> createCreateProductResponse(CreateProductResponse value) {
+        return new JAXBElement<CreateProductResponse>(_CreateProductResponse_QNAME, CreateProductResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ProductSearchFault }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "ProductSearchException")
     public JAXBElement<ProductSearchFault> createProductSearchException(ProductSearchFault value) {
         return new JAXBElement<ProductSearchFault>(_ProductSearchException_QNAME, ProductSearchFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetImage }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "getImage")
+    public JAXBElement<GetImage> createGetImage(GetImage value) {
+        return new JAXBElement<GetImage>(_GetImage_QNAME, GetImage.class, null, value);
     }
 
     /**
@@ -260,15 +305,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "getProducts")
     public JAXBElement<GetProducts> createGetProducts(GetProducts value) {
         return new JAXBElement<GetProducts>(_GetProducts_QNAME, GetProducts.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteProductByIdResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "deleteProductByIdResponse")
-    public JAXBElement<DeleteProductByIdResponse> createDeleteProductByIdResponse(DeleteProductByIdResponse value) {
-        return new JAXBElement<DeleteProductByIdResponse>(_DeleteProductByIdResponse_QNAME, DeleteProductByIdResponse.class, null, value);
     }
 
     /**

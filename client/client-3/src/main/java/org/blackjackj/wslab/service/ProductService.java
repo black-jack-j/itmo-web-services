@@ -26,6 +26,51 @@ public interface ProductService {
 
     /**
      * 
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getImage", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetImage")
+    @ResponseWrapper(localName = "getImageResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetImageResponse")
+    public byte[] getImage();
+
+    /**
+     * 
+     * @param searchTO
+     * @return
+     *     returns java.util.List<org.blackjackj.wslab.service.Product>
+     * @throws ProductSearchException
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getProducts", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetProducts")
+    @ResponseWrapper(localName = "getProductsResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetProductsResponse")
+    public List<Product> getProducts(
+        @WebParam(name = "searchTO", targetNamespace = "")
+        ProductSearchTO searchTO)
+        throws ProductSearchException
+    ;
+
+    /**
+     * 
+     * @param createTO
+     * @return
+     *     returns java.lang.Long
+     * @throws ProductCreateException
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "createProduct", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.CreateProduct")
+    @ResponseWrapper(localName = "createProductResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.CreateProductResponse")
+    public Long createProduct(
+        @WebParam(name = "createTO", targetNamespace = "")
+        ProductCreateTO createTO)
+        throws ProductCreateException
+    ;
+
+    /**
+     * 
      * @param id
      * @throws ProductNotFoundException
      */
@@ -51,40 +96,6 @@ public interface ProductService {
         @WebParam(name = "updateTO", targetNamespace = "")
         ProductUpdateTO updateTO)
         throws ProductNotFoundException, ProductUpdateException
-    ;
-
-    /**
-     * 
-     * @param createTO
-     * @return
-     *     returns java.lang.Long
-     * @throws ProductCreateException
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "createProduct", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.CreateProduct")
-    @ResponseWrapper(localName = "createProductResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.CreateProductResponse")
-    public Long createProduct(
-        @WebParam(name = "createTO", targetNamespace = "")
-        ProductCreateTO createTO)
-        throws ProductCreateException
-    ;
-
-    /**
-     * 
-     * @param searchTO
-     * @return
-     *     returns java.util.List<org.blackjackj.wslab.service.Product>
-     * @throws ProductSearchException
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getProducts", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetProducts")
-    @ResponseWrapper(localName = "getProductsResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetProductsResponse")
-    public List<Product> getProducts(
-        @WebParam(name = "searchTO", targetNamespace = "")
-        ProductSearchTO searchTO)
-        throws ProductSearchException
     ;
 
 }

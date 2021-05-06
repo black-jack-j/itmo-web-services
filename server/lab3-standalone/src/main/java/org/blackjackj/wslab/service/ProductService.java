@@ -10,16 +10,22 @@ import org.blackjackj.wslab.transport.ProductCreateTO;
 import org.blackjackj.wslab.transport.ProductSearchTO;
 import org.blackjackj.wslab.transport.ProductUpdateTO;
 
+import javax.imageio.ImageIO;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import javax.xml.ws.soap.MTOM;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@MTOM
 @WebService(serviceName = "ProductWebService")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -90,6 +96,16 @@ public class ProductService {
         product.setDescription(productUpdateTO.getDescription());
 
         productRepository.save(product);
+    }
+
+    @WebMethod(operationName = "getImage")
+    public Image getImage() {
+        try {
+            return ImageIO.read(new URL("https://www.memesmonkey.com/images/memesmonkey/44/4444666dae9bb6fe0eb61c1d9286d2ad.jpeg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void validateProductExistOtherwiseThrowException(Long id) throws ProductNotFoundException {
