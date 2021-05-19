@@ -46,6 +46,12 @@
                 <module>client-3</module>
             </modules>
         </profile>
+        <profile>
+            <id>lab-4</id>
+            <modules>
+                <module>client-4</module>
+            </modules>
+        </profile>
     </profiles>
 
     <build>
