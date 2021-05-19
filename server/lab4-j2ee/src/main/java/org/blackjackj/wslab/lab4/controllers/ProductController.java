@@ -27,7 +27,7 @@ public class ProductController {
 
     @ResponseBody
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductTO>> searchProducts(@RequestBody @Valid ProductSearchTO productSearchTO) {
+    public ResponseEntity<List<ProductTO>> searchProducts(@Valid ProductSearchTO productSearchTO) {
         ProductSearchCriteria searchCriteria = ProductTOUtils.getSearchCriteriaFromTO(productSearchTO);
         List<ProductTO> searchResult = productService.searchProducts(searchCriteria)
                 .stream().map(ProductTOUtils::getProductTOFromEntity).collect(Collectors.toList());
