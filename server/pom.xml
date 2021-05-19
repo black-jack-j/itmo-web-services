@@ -46,6 +46,12 @@
                 <module>lab3-standalone</module>
             </modules>
         </profile>
+        <profile>
+            <id>lab-4</id>
+            <modules>
+                <module>lab4-j2ee</module>
+            </modules>
+        </profile>
     </profiles>
 
     <build>

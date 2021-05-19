@@ -3,9 +3,9 @@ package org.blackjackj.wslab.transport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Null;
 
 @Data
 @NoArgsConstructor
