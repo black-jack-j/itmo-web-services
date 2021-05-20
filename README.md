@@ -8,7 +8,7 @@
     |   1     | lab-1-j2ee      | J2EE Tomee based implementation |
     |   2     | lab-2|  |
     |   3     | lab-3|  |
-    |   4     | lab-4|  |
+    |   4     | lab-4|   |
 2. Execute ```run``` script which deploys docker containers with Web Service and Database
 3. Execute ```java -jar wslab-client.jar```
 
@@ -16,5 +16,3 @@
 1. ```mvn clean package -P lab2-standalone```
 2. ```run.bat```
 3. ```java -jar wslab-client.jar get```
-
-# H
