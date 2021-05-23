@@ -19,9 +19,20 @@ public class CreateProductCommand implements Runnable, ProductServiceProvider {
     @Option(names = {"-d", "--description"})
     private String description;
 
+    @Option(names = {"--user"})
+    private String username;
+
+    @Option(names = {"--password"})
+    private String password;
+
     @Override
     public void run() {
-        ProductService productService = this.get();
+        ProductService productService;
+        if (username != null || password != null) {
+            productService = getWithAuth(username, password);
+        } else {
+            productService = this.get();
+        }
         ProductCreateTO createTO = new ProductCreateTO();
         createTO.setName(name);
         createTO.setDescription(description);
@@ -34,6 +45,8 @@ public class CreateProductCommand implements Runnable, ProductServiceProvider {
         } catch (ProductCreateException e) {
             ProductCreateFault fault = e.getFaultInfo();
             fault.getViolationMessages().forEach(System.out::println);
+        } catch (UnauthorizedException e) {
+            System.out.println("specify valid credentials using --user and --password options");
         }
 
     }

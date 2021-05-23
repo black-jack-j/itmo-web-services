@@ -26,17 +26,6 @@ public interface ProductService {
 
     /**
      * 
-     * @return
-     *     returns byte[]
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getImage", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetImage")
-    @ResponseWrapper(localName = "getImageResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetImageResponse")
-    public byte[] getImage();
-
-    /**
-     * 
      * @param searchTO
      * @return
      *     returns java.util.List<org.blackjackj.wslab.service.Product>
@@ -54,9 +43,21 @@ public interface ProductService {
 
     /**
      * 
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getImage", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetImage")
+    @ResponseWrapper(localName = "getImageResponse", targetNamespace = "http://service.wslab.blackjackj.org/", className = "org.blackjackj.wslab.service.GetImageResponse")
+    public byte[] getImage();
+
+    /**
+     * 
      * @param createTO
      * @return
      *     returns java.lang.Long
+     * @throws UnauthorizedException
      * @throws ProductCreateException
      */
     @WebMethod
@@ -66,12 +67,13 @@ public interface ProductService {
     public Long createProduct(
         @WebParam(name = "createTO", targetNamespace = "")
         ProductCreateTO createTO)
-        throws ProductCreateException
+        throws ProductCreateException, UnauthorizedException
     ;
 
     /**
      * 
      * @param id
+     * @throws UnauthorizedException
      * @throws ProductNotFoundException
      */
     @WebMethod
@@ -80,13 +82,14 @@ public interface ProductService {
     public void deleteProductById(
         @WebParam(name = "id", targetNamespace = "")
         Long id)
-        throws ProductNotFoundException
+        throws ProductNotFoundException, UnauthorizedException
     ;
 
     /**
      * 
      * @param updateTO
      * @throws ProductUpdateException
+     * @throws UnauthorizedException
      * @throws ProductNotFoundException
      */
     @WebMethod
@@ -95,7 +98,7 @@ public interface ProductService {
     public void updateProduct(
         @WebParam(name = "updateTO", targetNamespace = "")
         ProductUpdateTO updateTO)
-        throws ProductNotFoundException, ProductUpdateException
+        throws ProductNotFoundException, ProductUpdateException, UnauthorizedException
     ;
 
 }

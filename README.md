@@ -13,6 +13,12 @@
 2. Execute ```run``` script which deploys docker containers with Web Service and Database
 3. Execute ```java -jar wslab-client.jar```
 
+## Authentication: test/test
+For the 3 and 5+ labs you can specify user and password to submit operation:
+```ssh
+java -jar wslab-client.jar create --user test --password=test ...
+```
+
 # Example
 1. ```mvn clean package -P lab-2-standalone```
 2. ```run.bat```

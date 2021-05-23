@@ -1,9 +1,6 @@
 package org.blackjackj.wslab.cli.subcommands;
 
-import org.blackjackj.wslab.service.ProductNotFoundException;
-import org.blackjackj.wslab.service.ProductService;
-import org.blackjackj.wslab.service.ProductUpdateException;
-import org.blackjackj.wslab.service.ProductUpdateTO;
+import org.blackjackj.wslab.service.*;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
@@ -25,9 +22,21 @@ public class UpdateProductCommand implements Runnable, ProductServiceProvider {
     @Option(names = {"-d", "--description"})
     private String description;
 
+    @Option(names = {"--user"})
+    private String username;
+
+    @Option(names = {"--password"})
+    private String password;
+
     @Override
     public void run() {
-        ProductService productService = this.get();
+        ProductService productService;
+        if (username != null || password != null) {
+            productService = getWithAuth(username, password);
+        } else {
+            productService = this.get();
+        }
+
         ProductUpdateTO productUpdateTO = new ProductUpdateTO();
         productUpdateTO.setId(id);
         productUpdateTO.setName(name);
@@ -48,6 +57,8 @@ public class UpdateProductCommand implements Runnable, ProductServiceProvider {
             System.out.println(e.getFaultInfo().getMessage());
         } catch (ProductUpdateException e) {
             e.getFaultInfo().getViolationsMessages().forEach(System.out::println);
+        } catch (UnauthorizedException e) {
+            System.out.println("specify valid credentials using --user and --password options");
         }
     }
 }

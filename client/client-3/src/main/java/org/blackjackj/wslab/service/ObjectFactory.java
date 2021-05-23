@@ -33,6 +33,7 @@ public class ObjectFactory {
     private final static QName _DeleteProductByIdResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "deleteProductByIdResponse");
     private final static QName _DeleteProductById_QNAME = new QName("http://service.wslab.blackjackj.org/", "deleteProductById");
     private final static QName _CreateProductResponse_QNAME = new QName("http://service.wslab.blackjackj.org/", "createProductResponse");
+    private final static QName _UnauthorizedException_QNAME = new QName("http://service.wslab.blackjackj.org/", "UnauthorizedException");
     private final static QName _ProductSearchException_QNAME = new QName("http://service.wslab.blackjackj.org/", "ProductSearchException");
     private final static QName _GetImage_QNAME = new QName("http://service.wslab.blackjackj.org/", "getImage");
     private final static QName _ProductNotFoundException_QNAME = new QName("http://service.wslab.blackjackj.org/", "ProductNotFoundException");
@@ -116,6 +117,14 @@ public class ObjectFactory {
      */
     public CreateProductResponse createCreateProductResponse() {
         return new CreateProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link UnauthorizedFault }
+     * 
+     */
+    public UnauthorizedFault createUnauthorizedFault() {
+        return new UnauthorizedFault();
     }
 
     /**
@@ -269,6 +278,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "createProductResponse")
     public JAXBElement<CreateProductResponse> createCreateProductResponse(CreateProductResponse value) {
         return new JAXBElement<CreateProductResponse>(_CreateProductResponse_QNAME, CreateProductResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UnauthorizedFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.wslab.blackjackj.org/", name = "UnauthorizedException")
+    public JAXBElement<UnauthorizedFault> createUnauthorizedException(UnauthorizedFault value) {
+        return new JAXBElement<UnauthorizedFault>(_UnauthorizedException_QNAME, UnauthorizedFault.class, null, value);
     }
 
     /**
