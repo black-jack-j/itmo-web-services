@@ -15,8 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,30 +32,40 @@ public class ProductController {
 
     @ResponseBody
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductTO>> searchProducts(@Valid ProductSearchTO productSearchTO) {
+    public CompletableFuture<ResponseEntity<List<ProductTO>>> searchProducts(@Valid ProductSearchTO productSearchTO) {
         ProductSearchCriteria searchCriteria = ProductTOUtils.getSearchCriteriaFromTO(productSearchTO);
-        List<ProductTO> searchResult = productService.searchProducts(searchCriteria)
-                .stream().map(ProductTOUtils::getProductTOFromEntity).collect(Collectors.toList());
+        return productService.searchProducts(searchCriteria).handle((products, err) -> {
+            if (err == null) {
+                return ResponseEntity.ok(
+                        products.stream().map(ProductTOUtils::getProductTOFromEntity).collect(Collectors.toList())
+                );
+            }
+            else return ResponseEntity.badRequest().build();
+        });
 
-        return ResponseEntity.ok(searchResult);
     }
 
     @ResponseBody
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductTO> createProduct(@Valid ProductCreateTO productCreateTO) {
+    public CompletableFuture<ResponseEntity<ProductTO>> createProduct(@Valid ProductCreateTO productCreateTO) {
         Product productToSave = Product.builder()
                 .name(productCreateTO.getName())
                 .manufacturer(productCreateTO.getManufacturer())
                 .price(productCreateTO.getPrice())
                 .description(productCreateTO.getDescription())
                 .build();
-        Product createdProduct = productService.createProduct(productToSave);
-        return ResponseEntity.ok(ProductTOUtils.getProductTOFromEntity(createdProduct));
+        return productService.createProduct(productToSave).handle((createdProduct, err) -> {
+            if (err == null) {
+                return ResponseEntity.ok(ProductTOUtils.getProductTOFromEntity(createdProduct));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        });
     }
 
     @ResponseBody
     @PutMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductTO> updateProduct(@PathVariable Long id, @Valid ProductUpdateTO productUpdateTO) {
+    public CompletableFuture<ResponseEntity<ProductTO>> updateProduct(@PathVariable Long id, @Valid ProductUpdateTO productUpdateTO) {
         Product productUpdate = Product.builder()
                 .id(id)
                 .name(productUpdateTO.getName())
@@ -63,14 +73,32 @@ public class ProductController {
                 .price(productUpdateTO.getPrice())
                 .description(productUpdateTO.getDescription())
                 .build();
-        Product updatedProduct = productService.updateProduct(productUpdate);
-        return ResponseEntity.ok(ProductTOUtils.getProductTOFromEntity(updatedProduct));
+        return productService.updateProduct(productUpdate).handle((updatedProduct, err) -> {
+            if (err == null) {
+                ResponseEntity.ok(ProductTOUtils.getProductTOFromEntity(updatedProduct));
+            }
+            return ResponseEntity.badRequest().build();
+        });
+    }
+
+    @GetMapping(path = "/long")
+    public CompletableFuture<ResponseEntity> longTask() {
+        return productService.longRunningTask().handle((res, err) -> {
+            if (err == null) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
+        });
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
+    public CompletableFuture<ResponseEntity> deleteProduct(@PathVariable Long id) {
+        return productService.deleteProduct(id).handle((res, err) -> {
+            if (err == null) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
+        });
     }
 
 }
