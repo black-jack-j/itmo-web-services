@@ -24,6 +24,12 @@ public class UpdateProductCommand implements Runnable, ProductServiceProvider {
     @Option(names = {"-d", "--description"})
     private String description;
 
+    @Option(names = {"--user"})
+    private String username;
+
+    @Option(names = {"--password"})
+    private String password;
+
     @Override
     public void run() {
         ProductUpdateTO productUpdateTO = new ProductUpdateTO();
@@ -32,7 +38,12 @@ public class UpdateProductCommand implements Runnable, ProductServiceProvider {
         productUpdateTO.setId(id);
         productUpdateTO.setDescription(description);
         productUpdateTO.setPrice(price);
-        ProductWebService productWebService = this.get();
+        ProductWebService productWebService;
+        if (username != null || password != null) {
+            productWebService = getWithAuth(username, password);
+        } else {
+            productWebService = this.get();
+        }
         ProductTO updatedProduct = productWebService.updateProduct(id, productUpdateTO);
         System.out.println(updatedProduct);
     }

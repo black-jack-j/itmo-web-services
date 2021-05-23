@@ -10,9 +10,20 @@ public class DeleteProductCommand implements Runnable, ProductServiceProvider {
     @Option(names = {"-i", "--id"}, required = true)
     private Long id;
 
+    @Option(names = {"--user"})
+    private String username;
+
+    @Option(names = {"--password"})
+    private String password;
+
     @Override
     public void run() {
-        ProductWebService productWebService = this.get();
+        ProductWebService productWebService;
+        if (username != null || password != null) {
+            productWebService = getWithAuth(username, password);
+        } else {
+            productWebService = this.get();
+        }
         productWebService.deleteProduct(id);
         System.out.println("deleted product #"+id);
     }

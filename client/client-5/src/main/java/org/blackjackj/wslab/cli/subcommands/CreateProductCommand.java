@@ -21,6 +21,12 @@ public class CreateProductCommand implements Runnable, ProductServiceProvider {
     @Option(names = {"-d", "--description"})
     private String description;
 
+    @Option(names = {"--user"})
+    private String username;
+
+    @Option(names = {"--password"})
+    private String password;
+
     @Override
     public void run() {
         ProductCreateTO productCreateTO = new ProductCreateTO();
@@ -28,7 +34,12 @@ public class CreateProductCommand implements Runnable, ProductServiceProvider {
         productCreateTO.setManufacturer(manufacturer);
         productCreateTO.setPrice(price);
         productCreateTO.setDescription(description);
-        ProductWebService productWebService = this.get();
+        ProductWebService productWebService;
+        if (username != null || password != null) {
+            productWebService = getWithAuth(username, password);
+        } else {
+            productWebService = this.get();
+        }
         ProductTO createdProduct = productWebService.createProduct(productCreateTO);
         System.out.println(createdProduct);
     }
