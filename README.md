@@ -10,6 +10,8 @@
     |   3     | lab-3|  |
     |   4     | lab-4|   |
     |   5     | lab-5|   |
+    |   6     | lab-6|   |
+
 2. Execute ```run``` script which deploys docker containers with Web Service and Database
 3. Execute ```java -jar wslab-client.jar```
 
