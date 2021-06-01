@@ -58,6 +58,12 @@
                 <module>client-5</module>
             </modules>
         </profile>
+        <profile>
+            <id>lab-6</id>
+            <modules>
+                <module>client-6</module>
+            </modules>
+        </profile>
     </profiles>
 
     <build>
